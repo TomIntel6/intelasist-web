@@ -73,5 +73,6 @@
   --t-base: 200ms;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
+@media (max-width: 399px) { :root { --fs-eyebrow: 0.6875rem; } }
 @media (min-width: 768px) { :root { --gutter: 32px; } }
 @media (min-width: 1200px) { :root { --gutter: 64px; } }

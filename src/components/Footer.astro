@@ -46,9 +46,11 @@ const year = new Date().getFullYear();
 </footer>
 
 <style>
-  .footer { background: var(--brand-navy-deep); color: var(--color-text-on-dark); padding-block: var(--s-16) var(--s-8); }
+  .footer { background: var(--brand-navy-deep); color: var(--color-text-on-dark); padding-block: var(--s-12) var(--s-8); }
+  @media (min-width: 768px) { .footer { padding-block: var(--s-16) var(--s-8); } }
   .footer__grid { display: grid; gap: var(--s-8); grid-template-columns: 1fr; }
-  @media (min-width: 640px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 480px) { .footer__grid { grid-template-columns: 1fr 1fr; } .footer__brand { grid-column: 1 / -1; } }
+  @media (min-width: 1024px) { .footer__brand { grid-column: auto; } }
   @media (min-width: 1024px) { .footer__grid { grid-template-columns: 1.6fr 1fr 1fr 0.8fr; gap: var(--s-12); } }
   .footer__brand img { width: 160px; height: auto; margin-bottom: var(--s-4); }
   .footer__legal { font-weight: 600; color: #fff; }

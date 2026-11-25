@@ -68,19 +68,22 @@ h3, .h3 { font-family: var(--font-display); font-size: var(--fs-h3); line-height
 
 /* ---------- Layout ---------- */
 .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
-.section { padding-block: var(--s-16); }
+.section { padding-block: var(--s-12); }
+@media (min-width: 640px) { .section { padding-block: var(--s-16); } }
 @media (min-width: 768px) { .section { padding-block: var(--s-24); } }
 .section--alt { background: var(--color-surface-alt); }
 .section--dark { background: var(--color-surface-dark); color: var(--color-text-on-dark); }
 .section--dark h2, .section--dark h3 { color: #fff; }
 .section--dark .muted, .section--dark .lead { color: var(--color-text-on-dark-muted); }
 .section--tint { background: var(--color-surface-tint); }
-.section-head { max-width: 46rem; margin-bottom: var(--s-12); }
+.section-head { max-width: 46rem; margin-bottom: var(--s-8); }
+@media (min-width: 768px) { .section-head { margin-bottom: var(--s-12); } }
 .section-head--row { max-width: none; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s-6); }
 .section-head--row > div { max-width: 46rem; }
 .section-head .eyebrow { margin-bottom: var(--s-4); }
 .section-head .lead { margin-top: var(--s-4); }
-.grid-3 { display: grid; gap: var(--s-6); grid-template-columns: 1fr; }
+.grid-3 { display: grid; gap: var(--s-4); grid-template-columns: 1fr; }
+@media (min-width: 640px) { .grid-3 { gap: var(--s-6); } }
 @media (min-width: 768px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
 .grid-2 { display: grid; gap: var(--s-8); grid-template-columns: 1fr; }
 @media (min-width: 900px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
@@ -90,7 +93,7 @@ h3, .h3 { font-family: var(--font-display); font-size: var(--fs-h3); line-height
   display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
   min-height: 48px; padding: 0 var(--s-6);
   border-radius: var(--radius-pill); border: 1.5px solid transparent;
-  font-family: var(--font-display); font-weight: 700; font-size: 1rem; text-decoration: none; cursor: pointer;
+  font-family: var(--font-display); font-weight: 700; font-size: 1rem; text-decoration: none; cursor: pointer; white-space: nowrap;
   transition: background-color var(--t-base) var(--ease), color var(--t-base) var(--ease), border-color var(--t-base) var(--ease), transform var(--t-fast) var(--ease);
 }
 .btn:active { transform: translateY(1px); }
