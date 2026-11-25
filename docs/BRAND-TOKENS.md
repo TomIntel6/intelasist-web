@@ -35,7 +35,7 @@ Contrastes principales: navy `#163E64` sobre blanco 10.6:1; azul `#0E62AC` sobre
 
 ## Tipografía
 
-El sitio vigente carga **Poppins** (900) y **Open Sans** desde el constructor. El brief fija Inter o Manrope autoalojada; se eligió **Manrope** (variable 400–800, subset latin, `font-display: swap`, 24 KB WOFF2, licencia OFL). Si dirección prefiere conservar Poppins/Open Sans, basta con cambiar `@font-face` en `global.css` y `--font-sans` en `tokens.css`.
+El sitio vigente carga **Poppins** (900) y **Open Sans** desde el constructor. Dirección pidió evitar las familias habituales en sitios generados por IA (Inter, Manrope, Space Grotesk, etc.). Se eligió la pareja corporativa **Red Hat Display** (titulares, botones, navegación; variable 500–900) + **Red Hat Text** (cuerpo; variable 400–700), ambas autoalojadas en subset latin con `font-display: swap` (≈30 KB cada una, licencia OFL). Si dirección prefiere conservar Poppins/Open Sans, basta con cambiar los `@font-face` en `global.css` y `--font-display` / `--font-sans` en `tokens.css`.
 
 ## Motivo gráfico
 

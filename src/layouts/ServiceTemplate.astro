@@ -33,7 +33,7 @@ const jsonLd = [
 ];
 ---
 <Base title={service.title} description={service.description} {path} {jsonLd}>
-  <section class="svc-hero dots">
+  <section class="svc-hero">
     <div class="container">
       <Breadcrumbs items={[{ label: 'Servicios', href: '/servicios' }, { label: service.name }]} />
       <div class="svc-hero__copy">
@@ -109,7 +109,7 @@ const jsonLd = [
 </Base>
 
 <style>
-  .svc-hero { padding-block: var(--s-6) var(--s-12); border-bottom: 1px solid var(--color-border); background-color: var(--color-surface); }
+  .svc-hero { padding-block: var(--s-6) var(--s-12); background-color: var(--color-surface-alt); border-bottom: 1px solid var(--color-border); }
   .svc-hero__copy { margin-top: var(--s-8); max-width: 44rem; }
   .svc-hero__copy .eyebrow { margin-bottom: var(--s-4); }
   .svc-hero__copy h1 { margin-bottom: var(--s-4); }
@@ -123,7 +123,8 @@ const jsonLd = [
   .svc-list--check li::before { background: var(--brand-navy); }
   .svc-list--note li::before { background: transparent; border: 2px solid var(--brand-blue); width: 6px; height: 6px; }
   .svc-list--note li { color: var(--color-text-muted); }
-  .faq { display: grid; gap: var(--s-4); max-width: 52rem; }
+  .faq { display: grid; gap: var(--s-4); }
+  @media (min-width: 900px) { .faq { grid-template-columns: 1fr 1fr; gap: var(--s-6); } }
   .faq__item { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); padding: var(--s-6); }
   .faq__item dt { font-weight: 700; color: var(--brand-navy); font-size: 1.125rem; margin-bottom: var(--s-2); }
   .faq__item dd { margin: 0; color: var(--color-text-muted); }

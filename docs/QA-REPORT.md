@@ -1,5 +1,7 @@
 # Reporte de QA · 25/11/2026
 
+> Actualizado tras el rediseño v2 (tipografía Red Hat Display/Text, contenedor 1400 px, hero de sangrado completo, sin fondo de puntos). Lighthouse móvil en `/` tras v2: 100/100/100/100, LCP 1.65 s, CLS 0, 123 KB transferidos (dos fuentes en lugar de una).
+
 Entorno: Windows 11, Node 22.14, Astro 5, Chromium 1223 (Playwright) en headless. Servidor: `astro preview` en `127.0.0.1:4321` (sin red real; los tiempos son de laboratorio, **no** CWV de campo).
 
 ## Build y tipos

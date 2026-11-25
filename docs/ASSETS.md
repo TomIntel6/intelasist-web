@@ -7,7 +7,8 @@
 | `public/images/apple-touch-icon.png` (180×180) | Generado: fondo navy + logo blanco | iOS | Derivado del oficial |
 | `public/images/og-intelasist.png` (1200×630) | Generado: logo sobre blanco + barra bicolor | Open Graph / Twitter | Derivado del oficial |
 | `public/favicon.svg` | Monograma "I/A" en navy/azul de marca | Pestaña del navegador | Propio |
-| `public/fonts/manrope-latin-var.woff2` | Google Fonts (Manrope, OFL) | Tipografía única | SIL OFL 1.1 |
+| `public/fonts/redhat-display-latin-var.woff2` | Google Fonts (Red Hat Display, OFL) | Titulares, botones, navegación | SIL OFL 1.1 |
+| `public/fonts/redhat-text-latin-var.woff2` | Google Fonts (Red Hat Text, OFL) | Cuerpo de texto | SIL OFL 1.1 |
 | Ilustración SVG del hero | Inline en `src/components/Hero.astro` | Portada | Propio |
 
 ## Pendiente de dirección

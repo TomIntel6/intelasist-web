@@ -26,6 +26,19 @@ npm run preview      # sirve /dist en http://localhost:4321
 
 Otros comandos: `npm run check` (typecheck de Astro/TypeScript).
 
+## Vista previa en línea (GitHub Pages)
+
+Cada push a `main` ejecuta `.github/workflows/pages.yml`, que construye con `npm run build:pages` y publica en **https://tomintel6.github.io/intelasist-web/**. Esa vista previa:
+
+- lleva `noindex` (es staging, no debe aparecer en buscadores);
+- prefija los enlaces con `/intelasist-web` mediante `scripts/rewrite-base.mjs`, porque Pages sirve el sitio bajo una subruta.
+
+Para producción en `intelasist.com` se usa `npm run build` normal: sin prefijo y con indexación activa.
+
+## Cómo dar feedback
+
+Abre un *Issue* en el repositorio con la página, una captura y el cambio que quieres. Si prefieres, anota los cambios en un correo y los pasamos a Issues.
+
 ## Estructura
 
 ```
@@ -39,7 +52,7 @@ src/
                             PartnerProof, ProviderCTA, ProviderForm, Breadcrumbs, SEOHead, Footer
   pages/                 ← rutas (ver docs/ROUTES.md) + sitemap.xml.ts
 public/
-  fonts/manrope-latin-var.woff2   ← fuente autoalojada (subset latin, variable 400–800)
+  fonts/redhat-*.woff2            ← Red Hat Display + Red Hat Text autoalojadas (subset latin, variables)
   images/                         ← logo oficial y derivados (ver docs/ASSETS.md)
   robots.txt, favicon.svg
 docs/                    ← tokens de marca, rutas, assets, QA, checklist de lanzamiento

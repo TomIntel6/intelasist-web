@@ -1,28 +1,46 @@
 ---
 import { providers } from '../content/site';
 ---
-<section class="section section--tint cta dots" aria-labelledby="prov-title">
-  <div class="container cta__inner">
-    <div>
-      <p class="eyebrow">Red de proveedores</p>
-      <h2 id="prov-title">{providers.title}</h2>
-      <p class="lead">{providers.text}</p>
-    </div>
-    <div class="cta__actions">
-      <a href={providers.cta.href} class="btn btn--primary">{providers.cta.label}</a>
-      <a href="/proveedores" class="link-arrow">
-        Conoce los requisitos
-        <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-      </a>
+<section class="section cta" aria-labelledby="prov-title">
+  <div class="container">
+    <div class="cta__card">
+      <div class="cta__copy">
+        <p class="eyebrow cta__eyebrow">Red de proveedores</p>
+        <h2 id="prov-title">{providers.title}</h2>
+        <p class="lead">{providers.text}</p>
+      </div>
+      <div class="cta__actions">
+        <a href={providers.cta.href} class="btn btn--light">{providers.cta.label}</a>
+        <a href="/proveedores" class="link-arrow cta__link">
+          Conoce los requisitos
+          <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .cta { background-color: var(--color-surface-tint); }
-  .cta__inner { display: grid; gap: var(--s-8); grid-template-columns: 1fr; align-items: center; }
-  .cta__inner .eyebrow { margin-bottom: var(--s-4); }
-  .cta__inner .lead { margin-top: var(--s-4); }
+  .cta { background: var(--color-surface); }
+  .cta__card {
+    position: relative; overflow: hidden; border-radius: var(--radius);
+    background: var(--brand-navy); color: #fff; padding: var(--s-12) var(--s-6);
+    display: grid; gap: var(--s-8); grid-template-columns: 1fr; align-items: center;
+  }
+  .cta__card::after {
+    content: ''; position: absolute; right: -10%; top: -40%; width: 46%; aspect-ratio: 1; border-radius: 50%;
+    background: var(--brand-blue); opacity: 0.5; filter: blur(70px); pointer-events: none; z-index: 0;
+  }
+  .cta__copy, .cta__actions { position: relative; z-index: 1; }
+  .cta__card h2 { color: #fff; }
+  .cta__card .lead { color: var(--color-text-on-dark-muted); margin-top: var(--s-4); }
+  .cta__eyebrow { color: #8FB4D9; margin-bottom: var(--s-4); }
+  .cta__eyebrow::before { background: linear-gradient(90deg, #fff 0 50%, var(--brand-blue) 50% 100%); }
   .cta__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-4) var(--s-8); }
-  @media (min-width: 900px) { .cta__inner { grid-template-columns: 1.3fr 0.7fr; } .cta__actions { justify-content: flex-end; } }
+  .cta__link { color: #fff; }
+  .cta__link:hover { color: #C9D6E3; }
+  @media (min-width: 900px) {
+    .cta__card { grid-template-columns: 1.3fr 0.7fr; padding: var(--s-16) var(--s-16); }
+    .cta__actions { justify-content: flex-end; }
+  }
 </style>

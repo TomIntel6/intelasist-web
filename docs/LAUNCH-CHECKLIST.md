@@ -19,7 +19,7 @@
 - [ ] Redirecciones 301 (`docs/ROUTES.md`).
 - [ ] Headers: HSTS, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`, CSP ajustada (`default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'`). Nota: Astro inyecta `<script type="application/ld+json">` y scripts inline por componente; si la CSP bloquea inline, activar `experimental.csp` de Astro o hashes.
 - [ ] Caché: `public/fonts` e `images` con `Cache-Control: max-age=31536000, immutable`; HTML sin caché larga.
-- [ ] Staging protegido con `noindex` / autenticación; retirar antes de producción.
+- [x] Staging: vista previa en GitHub Pages (`.github/workflows/pages.yml`) con `noindex` automático y enlaces prefijados por `scripts/rewrite-base.mjs`. Producción se construye con `npm run build` (sin `PAGES_BASE`) y queda indexable.
 - [ ] Verificar HTTP 200, canonicals, `sitemap.xml`, `robots.txt` en el dominio real.
 - [ ] Google Search Console + Bing Webmaster Tools: enviar sitemap; IndexNow opcional.
 - [ ] Revisión manual en Safari iOS y Chrome Android (dispositivos reales).

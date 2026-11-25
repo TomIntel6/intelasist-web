@@ -8,7 +8,8 @@
     "start": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview --host",
-    "check": "astro check"
+    "check": "astro check",
+    "build:pages": "astro build && node scripts/rewrite-base.mjs"
   },
   "dependencies": {
     "astro": "^5.0.0"

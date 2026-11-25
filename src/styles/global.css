@@ -1,12 +1,20 @@
 @import './tokens.css';
 
-/* ---------- Fuente local (WOFF2 subset latin, variable 400–800) ---------- */
+/* ---------- Fuentes locales (WOFF2 subset latin, variables) ---------- */
 @font-face {
-  font-family: 'Manrope';
+  font-family: 'Red Hat Display';
   font-style: normal;
-  font-weight: 400 800;
+  font-weight: 500 900;
   font-display: swap;
-  src: url('/fonts/manrope-latin-var.woff2') format('woff2');
+  src: url('/fonts/redhat-display-latin-var.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Red Hat Text';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/redhat-text-latin-var.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -38,15 +46,15 @@ button { font: inherit; color: inherit; }
 }
 
 /* ---------- Tipografía ---------- */
-h1, .h1 { font-size: var(--fs-h1); line-height: var(--lh-tight); font-weight: 800; letter-spacing: -0.025em; color: var(--brand-navy); text-wrap: balance; }
-h2, .h2 { font-size: var(--fs-h2); line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; color: var(--brand-navy); text-wrap: balance; }
-h3, .h3 { font-size: var(--fs-h3); line-height: 1.25; font-weight: 700; color: var(--brand-navy); }
+h1, .h1 { font-family: var(--font-display); font-size: var(--fs-h1); line-height: var(--lh-tight); font-weight: 800; letter-spacing: -0.025em; color: var(--brand-navy); text-wrap: balance; }
+h2, .h2 { font-family: var(--font-display); font-size: var(--fs-h2); line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; color: var(--brand-navy); text-wrap: balance; }
+h3, .h3 { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.25; font-weight: 700; color: var(--brand-navy); }
 .lead { font-size: clamp(1.125rem, 1rem + 0.5vw, 1.3125rem); line-height: 1.5; color: var(--color-text-muted); max-width: 60ch; text-wrap: pretty; }
 .muted { color: var(--color-text-muted); }
 .small { font-size: var(--fs-small); }
 .eyebrow {
   display: inline-flex; align-items: center; gap: var(--s-3);
-  font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  font-family: var(--font-display); font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--brand-blue);
 }
 /* Motivo del logotipo: barra bicolor navy/azul */
@@ -68,6 +76,8 @@ h3, .h3 { font-size: var(--fs-h3); line-height: 1.25; font-weight: 700; color: v
 .section--dark .muted, .section--dark .lead { color: var(--color-text-on-dark-muted); }
 .section--tint { background: var(--color-surface-tint); }
 .section-head { max-width: 46rem; margin-bottom: var(--s-12); }
+.section-head--row { max-width: none; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s-6); }
+.section-head--row > div { max-width: 46rem; }
 .section-head .eyebrow { margin-bottom: var(--s-4); }
 .section-head .lead { margin-top: var(--s-4); }
 .grid-3 { display: grid; gap: var(--s-6); grid-template-columns: 1fr; }
@@ -75,18 +85,12 @@ h3, .h3 { font-size: var(--fs-h3); line-height: 1.25; font-weight: 700; color: v
 .grid-2 { display: grid; gap: var(--s-8); grid-template-columns: 1fr; }
 @media (min-width: 900px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
 
-/* Fondo de puntos (nodos de red) — detalle de marca, muy sutil */
-.dots {
-  background-image: radial-gradient(var(--tint-200) 1.1px, transparent 1.1px);
-  background-size: 22px 22px;
-}
-
 /* ---------- Botones ---------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
   min-height: 48px; padding: 0 var(--s-6);
   border-radius: var(--radius-pill); border: 1.5px solid transparent;
-  font-weight: 700; font-size: 1rem; text-decoration: none; cursor: pointer;
+  font-family: var(--font-display); font-weight: 700; font-size: 1rem; text-decoration: none; cursor: pointer;
   transition: background-color var(--t-base) var(--ease), color var(--t-base) var(--ease), border-color var(--t-base) var(--ease), transform var(--t-fast) var(--ease);
 }
 .btn:active { transform: translateY(1px); }
@@ -103,9 +107,9 @@ h3, .h3 { font-size: var(--fs-h3); line-height: 1.25; font-weight: 700; color: v
 
 .link-arrow {
   display: inline-flex; align-items: center; gap: var(--s-2);
-  font-weight: 700; text-decoration: none; color: var(--brand-navy);
+  font-family: var(--font-display); font-weight: 700; text-decoration: none; color: var(--brand-navy);
 }
-.link-arrow svg { width: 18px; height: 18px; transition: transform var(--t-base) var(--ease); }
+.link-arrow svg { width: 18px; height: 18px; flex: none; transition: transform var(--t-base) var(--ease); }
 .link-arrow:hover { color: var(--brand-blue); }
 .link-arrow:hover svg { transform: translateX(3px); }
 
@@ -134,7 +138,7 @@ h3, .h3 { font-size: var(--fs-h3); line-height: 1.25; font-weight: 700; color: v
 .rise > *:nth-child(5) { animation-delay: 240ms; }
 
 /* ---------- Cabecera de página interior ---------- */
-.page-hero { padding-block: var(--s-6) var(--s-12); border-bottom: 1px solid var(--color-border); background-color: var(--color-surface); }
+.page-hero { padding-block: var(--s-6) var(--s-12); background-color: var(--color-surface-alt); border-bottom: 1px solid var(--color-border); }
 .page-hero__copy { margin-top: var(--s-8); max-width: 44rem; }
 .page-hero__copy .eyebrow { margin-bottom: var(--s-4); }
 .page-hero__copy h1 { margin-bottom: var(--s-4); }
