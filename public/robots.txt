@@ -1,0 +1,10 @@
+# Intelasist · robots.txt
+# Produccion: permitir rastreo completo. Staging: proteger y usar noindex (ver docs/LAUNCH-CHECKLIST.md).
+User-agent: *
+Allow: /
+
+# Elegibilidad en busqueda de ChatGPT (OpenAI). GPTBot (entrenamiento) queda a decision de direccion.
+User-agent: OAI-SearchBot
+Allow: /
+
+Sitemap: https://intelasist.com/sitemap.xml

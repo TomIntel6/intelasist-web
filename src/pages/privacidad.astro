@@ -1,0 +1,64 @@
+---
+/**
+ * Aviso de privacidad.
+ * El sitio vigente publica "Privacy Policy coming soon". Este texto es un BORRADOR
+ * estructural para revisión del responsable legal (Ley 81 de 2019, Panamá).
+ * No publicar como definitivo sin aprobación.
+ */
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { company } from '../content/site';
+---
+<Base
+  title="Aviso de privacidad · Intelasist"
+  description="Aviso de privacidad de Intel Asistencia, S.A. (Intelasist): qué datos recopilamos a través del sitio web, con qué finalidad y cómo ejercer tus derechos."
+  path="/privacidad"
+>
+  <section class="page-hero dots">
+    <div class="container">
+      <Breadcrumbs items={[{ label: 'Aviso de privacidad' }]} />
+      <div class="page-hero__copy">
+        <p class="eyebrow">Legal</p>
+        <h1>Aviso de privacidad</h1>
+        <p class="lead">Cómo tratamos los datos personales que nos compartes a través de este sitio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container legal-wrap">
+      <div class="notice" role="note">
+        <strong>Borrador en revisión.</strong> Este aviso está pendiente de aprobación por el responsable legal de {company.legalName} conforme a la Ley 81 de 2019 sobre protección de datos personales de Panamá.
+      </div>
+
+      <div class="prose legal">
+        <h2 class="h3">Responsable</h2>
+        <p>{company.legalName}, {company.country}. Contacto: <a href={company.email.href}>{company.email.display}</a>.</p>
+
+        <h2 class="h3">Datos que recopilamos</h2>
+        <p>A través del formulario de inscripción de proveedores solicitamos: nombre o razón social, nombre de contacto, teléfono, correo electrónico, provincia o zona de cobertura, tipo de servicio y un comentario opcional. No solicitamos documentos de identidad, licencias ni datos bancarios en esta etapa.</p>
+
+        <h2 class="h3">Finalidad</h2>
+        <p>Evaluar tu solicitud de incorporación a la red de proveedores y contactarte para continuar el proceso. Si tu perfil avanza, te solicitaremos documentación adicional por un canal seguro.</p>
+
+        <h2 class="h3">Conservación</h2>
+        <p>Conservamos los datos durante el tiempo necesario para evaluar la solicitud y, en caso de incorporación, durante la relación comercial, conforme a nuestra política de retención. <em>(Pendiente: definir plazos con el responsable legal.)</em></p>
+
+        <h2 class="h3">Tus derechos</h2>
+        <p>Puedes solicitar acceso, rectificación, cancelación u oposición al tratamiento de tus datos escribiendo a <a href={company.email.href}>{company.email.display}</a>.</p>
+
+        <h2 class="h3">Cookies y analítica</h2>
+        <p>Este sitio no utiliza cookies de seguimiento ni herramientas de analítica de terceros. <em>(Actualizar si dirección aprueba la instalación de medición.)</em></p>
+
+        <p class="small muted">Última actualización: borrador del 25 de noviembre de 2026.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal-wrap { max-width: 46rem; }
+  .notice { padding: var(--s-4) var(--s-6); border-radius: var(--radius-sm); background: var(--tint-100); border-left: 4px solid var(--brand-blue); margin-bottom: var(--s-8); color: var(--brand-navy); }
+  .legal h2 { margin-top: var(--s-8); margin-bottom: var(--s-3); }
+  .legal h2:first-child { margin-top: 0; }
+</style>

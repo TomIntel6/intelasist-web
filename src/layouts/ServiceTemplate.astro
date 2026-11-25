@@ -1,0 +1,137 @@
+---
+import Base from './Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ProviderCTA from '../components/ProviderCTA.astro';
+import { company, services, type Service } from '../content/site';
+
+interface Props { service: Service }
+const { service } = Astro.props;
+const path = `/servicios/${service.slug}`;
+const site = 'https://intelasist.com';
+const others = services.filter((s) => s.slug !== service.slug);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.name,
+    serviceType: service.name,
+    description: service.description,
+    provider: { '@type': 'Organization', name: company.brand, legalName: company.legalName, url: site },
+    areaServed: { '@type': 'Country', name: 'Panamá' },
+    url: `${site}${path}`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${site}/` },
+      { '@type': 'ListItem', position: 2, name: 'Servicios', item: `${site}/servicios` },
+      { '@type': 'ListItem', position: 3, name: service.name, item: `${site}${path}` },
+    ],
+  },
+];
+---
+<Base title={service.title} description={service.description} {path} {jsonLd}>
+  <section class="svc-hero dots">
+    <div class="container">
+      <Breadcrumbs items={[{ label: 'Servicios', href: '/servicios' }, { label: service.name }]} />
+      <div class="svc-hero__copy">
+        <p class="eyebrow">Servicio en Panamá</p>
+        <h1>{service.h1}</h1>
+        <p class="lead">{service.intro}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container svc-grid">
+      <div class="svc-block">
+        <h2 class="h3 mark">A quién se dirige</h2>
+        <ul class="svc-list">{service.audience.map((a) => <li>{a}</li>)}</ul>
+      </div>
+      <div class="svc-block">
+        <h2 class="h3 mark">Qué incluye</h2>
+        <ul class="svc-list svc-list--check">{service.includes.map((a) => <li>{a}</li>)}</ul>
+      </div>
+      <div class="svc-block">
+        <h2 class="h3 mark">Qué debes saber</h2>
+        <ul class="svc-list svc-list--note">{service.excludes.map((a) => <li>{a}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container svc-faq">
+      <div class="section-head">
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h2>Respuestas directas</h2>
+      </div>
+      <dl class="faq">
+        {service.faq.map((f) => (
+          <div class="faq__item">
+            <dt>{f.q}</dt>
+            <dd>{f.a}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container svc-contact">
+      <div>
+        <p class="eyebrow">Cómo solicitarlo</p>
+        <h2>Conversemos sobre tu operación</h2>
+        <p class="lead">Cuéntanos qué necesitas y te orientamos sobre el alcance adecuado para tu empresa.</p>
+      </div>
+      <div class="svc-contact__actions">
+        <a href="/contacto" class="btn btn--primary">Contactar al equipo</a>
+        <a href={company.phone.href} class="link-arrow">{company.phone.display}</a>
+      </div>
+    </div>
+    <div class="container svc-others">
+      <h2 class="h3">Otros servicios</h2>
+      <ul class="svc-others__list">
+        {others.map((o) => (
+          <li>
+            <a href={`/servicios/${o.slug}`} class="link-arrow">
+              {o.name}
+              <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <ProviderCTA />
+</Base>
+
+<style>
+  .svc-hero { padding-block: var(--s-6) var(--s-12); border-bottom: 1px solid var(--color-border); background-color: var(--color-surface); }
+  .svc-hero__copy { margin-top: var(--s-8); max-width: 44rem; }
+  .svc-hero__copy .eyebrow { margin-bottom: var(--s-4); }
+  .svc-hero__copy h1 { margin-bottom: var(--s-4); }
+  @media (min-width: 900px) { .svc-hero { padding-block: var(--s-8) var(--s-16); } }
+  .svc-grid { display: grid; gap: var(--s-8); grid-template-columns: 1fr; }
+  @media (min-width: 900px) { .svc-grid { grid-template-columns: repeat(3, 1fr); gap: var(--s-12); } }
+  .mark { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-4); }
+  .svc-list { display: flex; flex-direction: column; gap: var(--s-3); }
+  .svc-list li { padding-left: var(--s-6); position: relative; color: var(--color-text); }
+  .svc-list li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 8px; height: 8px; border-radius: 50%; background: var(--brand-blue); }
+  .svc-list--check li::before { background: var(--brand-navy); }
+  .svc-list--note li::before { background: transparent; border: 2px solid var(--brand-blue); width: 6px; height: 6px; }
+  .svc-list--note li { color: var(--color-text-muted); }
+  .faq { display: grid; gap: var(--s-4); max-width: 52rem; }
+  .faq__item { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); padding: var(--s-6); }
+  .faq__item dt { font-weight: 700; color: var(--brand-navy); font-size: 1.125rem; margin-bottom: var(--s-2); }
+  .faq__item dd { margin: 0; color: var(--color-text-muted); }
+  .svc-contact { display: grid; gap: var(--s-6); grid-template-columns: 1fr; align-items: center; }
+  .svc-contact .eyebrow { margin-bottom: var(--s-4); }
+  .svc-contact .lead { margin-top: var(--s-4); }
+  .svc-contact__actions { display: flex; flex-wrap: wrap; gap: var(--s-4) var(--s-8); align-items: center; }
+  @media (min-width: 900px) { .svc-contact { grid-template-columns: 1.3fr 0.7fr; } .svc-contact__actions { justify-content: flex-end; } }
+  .svc-others { margin-top: var(--s-12); padding-top: var(--s-8); border-top: 1px solid var(--color-border); }
+  .svc-others__list { display: flex; flex-wrap: wrap; gap: var(--s-4) var(--s-8); margin-top: var(--s-4); }
+</style>

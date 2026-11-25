@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import ProviderCTA from '../components/ProviderCTA.astro';
+import { company } from '../content/site';
+
+const values = [
+  { name: 'Inmediatez', text: 'Respondemos con rapidez porque sabemos que cada minuto cuenta para quien necesita ayuda.' },
+  { name: 'Seguridad', text: 'Cada caso se coordina con proveedores de la red y con seguimiento hasta su cierre.' },
+  { name: 'Confianza', text: 'Comunicación clara con la persona asistida y con la empresa que contrata el programa.' },
+  { name: 'Servicio humano', text: 'Detrás de cada solicitud hay personas; tratamos cada caso con atención de primera.' },
+];
+---
+<Base
+  title="Nosotros · Intelasist, asistencia en Panamá"
+  description="Intel Asistencia, S.A. (Intelasist) es una empresa panameña de soluciones de asistencia. Conoce nuestra misión, valores y cómo operamos para empresas y personas."
+  path="/nosotros"
+>
+  <section class="page-hero dots">
+    <div class="container">
+      <Breadcrumbs items={[{ label: 'Nosotros' }]} />
+      <div class="page-hero__copy">
+        <p class="eyebrow">Nosotros</p>
+        <h1>Asistencia panameña, con servicio humano.</h1>
+        <p class="lead">{company.legalName} es una empresa de soluciones de asistencia con operación en {company.country}. Trabajamos para empresas que necesitan responder bien a sus clientes cuando más lo necesitan.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container about">
+      <div class="about__mission">
+        <p class="eyebrow">Misión</p>
+        <p class="about__quote">“{company.mission.text}”</p>
+      </div>
+      <div class="about__values">
+        <h2 class="h3">Lo que guía nuestro trabajo</h2>
+        <ul class="values">
+          {values.map((v) => (
+            <li class="values__item">
+              <h3>{v.name}</h3>
+              <p>{v.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <ProcessSteps />
+
+  <section class="section">
+    <div class="container about__cov">
+      <div>
+        <p class="eyebrow">Cobertura</p>
+        <h2>Operación en Panamá</h2>
+      </div>
+      <div class="prose">
+        <p>Coordinamos asistencia en el territorio panameño a través de nuestra red de proveedores. El alcance geográfico de cada programa se define con cada empresa según su operación.</p>
+        <p>¿Tienes una operación específica en mente? <a href="/contacto">Conversemos</a> sobre el alcance que necesitas.</p>
+      </div>
+    </div>
+  </section>
+
+  <ProviderCTA />
+</Base>
+
+<style>
+  .about { display: grid; gap: var(--s-12); grid-template-columns: 1fr; }
+  .about__mission .eyebrow { margin-bottom: var(--s-4); }
+  .about__quote { font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.625rem); font-weight: 600; line-height: 1.4; color: var(--brand-navy); text-wrap: pretty; padding-left: var(--s-6); border-left: 4px solid; border-image: linear-gradient(180deg, var(--brand-navy) 0 50%, var(--brand-blue) 50% 100%) 1; }
+  .about__values h2 { margin-bottom: var(--s-6); }
+  .values { display: grid; gap: var(--s-4); grid-template-columns: 1fr; }
+  .values__item { padding: var(--s-6); border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-surface-alt); }
+  .values__item h3 { font-size: 1.0625rem; margin-bottom: var(--s-2); }
+  .values__item p { color: var(--color-text-muted); font-size: var(--fs-small); }
+  @media (min-width: 640px) { .values { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 900px) { .about { grid-template-columns: 1fr 1fr; gap: var(--s-16); } }
+  .about__cov { display: grid; gap: var(--s-6); grid-template-columns: 1fr; }
+  .about__cov .eyebrow { margin-bottom: var(--s-4); }
+  @media (min-width: 900px) { .about__cov { grid-template-columns: 0.8fr 1.2fr; gap: var(--s-16); } }
+</style>

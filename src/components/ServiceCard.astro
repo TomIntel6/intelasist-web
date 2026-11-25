@@ -1,0 +1,41 @@
+---
+import type { Service } from '../content/site';
+interface Props { service: Service; index: number; }
+const { service, index } = Astro.props;
+const icons: Record<Service['slug'], string> = {
+  'asistencia-vial': `<path d="M3 15l2-6a2 2 0 0 1 2-1h10a2 2 0 0 1 2 1l2 6v4H3z"/><path d="M3 15h18"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="16.5" cy="18.5" r="1.5"/>`,
+  'asistencia-hogar': `<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>`,
+  'asistencia-salud': `<path d="M12 21s-7-4.6-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.4-7 10-7 10z"/><path d="M9 12h2l1-2 1.5 4 1-2H16"/>`,
+};
+---
+<a href={`/servicios/${service.slug}`} class="card">
+  <div class="card__top">
+    <span class="card__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" set:html={icons[service.slug]} /></span>
+    <span class="card__n" aria-hidden="true">0{index + 1}</span>
+  </div>
+  <h3 class="card__title">{service.name}</h3>
+  <p class="card__text">{service.short}</p>
+  <span class="card__link">
+    Ver {service.name.toLowerCase()}
+    <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+  </span>
+</a>
+
+<style>
+  .card {
+    display: flex; flex-direction: column; gap: var(--s-3); padding: var(--s-8) var(--s-6);
+    background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius);
+    text-decoration: none; color: inherit; height: 100%;
+    transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease), border-color var(--t-base) var(--ease);
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--tint-200); color: inherit; }
+  .card__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--s-3); }
+  .card__icon { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 14px; background: var(--tint-100); color: var(--brand-navy); }
+  .card:hover .card__icon { background: var(--brand-navy); color: #fff; }
+  .card__n { font-weight: 800; font-size: 0.875rem; letter-spacing: 0.06em; color: var(--color-text-muted); }
+  .card__title { margin: 0; }
+  .card__text { color: var(--color-text-muted); flex: 1; }
+  .card__link { display: inline-flex; align-items: center; gap: var(--s-2); font-weight: 700; color: var(--brand-blue); margin-top: var(--s-2); }
+  .card__link svg { width: 18px; height: 18px; transition: transform var(--t-base) var(--ease); }
+  .card:hover .card__link svg { transform: translateX(3px); }
+</style>

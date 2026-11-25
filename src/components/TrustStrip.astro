@@ -1,0 +1,38 @@
+---
+import { trust } from '../content/site';
+const icons = [
+  `<path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="9"/>`,
+  `<path d="M12 21s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10z"/><circle cx="12" cy="11" r="2"/>`,
+  `<path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="9" r="4"/>`,
+];
+---
+<section class="trust" aria-label="Atributos de confianza">
+  <div class="container">
+    <ul class="trust__list">
+      {trust.map((t, i) => (
+        <li class="trust__item">
+          <svg class="icon trust__icon" viewBox="0 0 24 24" aria-hidden="true" set:html={icons[i]} />
+          <div>
+            <p class="trust__label">{t.label}</p>
+            <p class="trust__detail">{t.detail}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .trust { background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+  .trust__list { display: grid; grid-template-columns: 1fr; }
+  .trust__item { display: flex; gap: var(--s-4); align-items: flex-start; padding: var(--s-6) 0; border-top: 1px solid var(--color-border); }
+  .trust__item:first-child { border-top: 0; }
+  .trust__icon { color: var(--brand-blue); margin-top: 2px; }
+  .trust__label { font-weight: 800; color: var(--brand-navy); }
+  .trust__detail { color: var(--color-text-muted); font-size: var(--fs-small); }
+  @media (min-width: 768px) {
+    .trust__list { grid-template-columns: repeat(3, 1fr); }
+    .trust__item { border-top: 0; border-left: 1px solid var(--color-border); padding: var(--s-8) var(--s-6); }
+    .trust__item:first-child { border-left: 0; padding-left: 0; }
+  }
+</style>

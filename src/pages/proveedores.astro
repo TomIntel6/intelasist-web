@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ProviderForm from '../components/ProviderForm.astro';
+import { providers } from '../content/site';
+---
+<Base
+  title="Red de proveedores de asistencia · Intelasist Panamá"
+  description="Forma parte de la red de proveedores de asistencia de Intelasist en Panamá: grúas, servicios para el hogar, salud y más. Conoce los requisitos y envía tu solicitud inicial."
+  path="/proveedores"
+>
+  <section class="page-hero dots">
+    <div class="container">
+      <Breadcrumbs items={[{ label: 'Proveedores' }]} />
+      <div class="page-hero__copy">
+        <p class="eyebrow">Red de proveedores</p>
+        <h1>{providers.title}</h1>
+        <p class="lead">{providers.text} Buscamos proveedores comprometidos con una atención rápida y de calidad en todo Panamá.</p>
+        <div class="page-hero__actions">
+          <a href="#inscripcion" class="btn btn--primary">Solicitar inscripción</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Por qué unirte</p>
+        <h2>Lo que ofrece la red</h2>
+      </div>
+      <ul class="grid-3 benefits">
+        {providers.benefits.map((b) => (
+          <li class="benefit">
+            <h3>{b.name}</h3>
+            <p>{b.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container prov-grid">
+      <div>
+        <p class="eyebrow">Perfiles</p>
+        <h2 class="h3">Categorías de servicio</h2>
+        <ul class="chips">{providers.categories.map((c) => <li class="chip">{c}</li>)}</ul>
+      </div>
+      <div>
+        <p class="eyebrow">Requisitos</p>
+        <h2 class="h3">Criterios de ingreso</h2>
+        <ul class="req">{providers.requirements.map((r) => <li>{r}</li>)}</ul>
+      </div>
+      <div>
+        <p class="eyebrow">Proceso</p>
+        <h2 class="h3">Cómo funciona</h2>
+        <ol class="flow">
+          {providers.steps.map((s, i) => <li><span class="flow__n">{i + 1}</span>{s}</li>)}
+        </ol>
+        <p class="small muted">La revisión no implica aceptación automática. Si tu perfil avanza, solicitaremos la documentación por un canal seguro.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="inscripcion-title">
+    <div class="container form-wrap">
+      <div class="section-head">
+        <p class="eyebrow">Inscripción</p>
+        <h2 id="inscripcion-title">Solicitud inicial</h2>
+      </div>
+      <ProviderForm />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .benefit { padding: var(--s-8) var(--s-6); border: 1px solid var(--color-border); border-radius: var(--radius); background: #fff; position: relative; overflow: hidden; }
+  .benefit::before { content: ''; position: absolute; top: 0; left: var(--s-6); width: 48px; height: 4px; border-radius: 0 0 2px 2px; background: linear-gradient(90deg, var(--brand-navy) 0 50%, var(--brand-blue) 50% 100%); }
+  .benefit h3 { margin-bottom: var(--s-2); }
+  .benefit p { color: var(--color-text-muted); }
+  .prov-grid { display: grid; gap: var(--s-12); grid-template-columns: 1fr; }
+  .prov-grid .eyebrow { margin-bottom: var(--s-3); }
+  .prov-grid h2 { margin-bottom: var(--s-4); }
+  @media (min-width: 900px) { .prov-grid { grid-template-columns: repeat(3, 1fr); } }
+  .chips { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .chip { display: inline-flex; align-items: center; min-height: 40px; padding: 0 var(--s-4); border-radius: var(--radius-pill); background: #fff; border: 1px solid var(--color-border); font-weight: 600; color: var(--brand-navy); font-size: var(--fs-small); }
+  .req { display: flex; flex-direction: column; gap: var(--s-3); }
+  .req li { padding-left: var(--s-6); position: relative; }
+  .req li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 8px; height: 8px; border-radius: 50%; background: var(--brand-blue); }
+  .flow { display: flex; flex-direction: column; gap: var(--s-3); margin-bottom: var(--s-4); }
+  .flow li { display: flex; align-items: center; gap: var(--s-3); font-weight: 700; color: var(--brand-navy); }
+  .flow__n { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--brand-navy); color: #fff; font-size: 0.875rem; }
+  .form-wrap { max-width: 56rem; }
+</style>

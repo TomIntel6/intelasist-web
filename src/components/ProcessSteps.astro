@@ -1,0 +1,38 @@
+---
+import { process } from '../content/site';
+---
+<section class="section section--dark steps" aria-labelledby="proceso-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow steps__eyebrow">Modelo operativo</p>
+      <h2 id="proceso-title">{process.title}</h2>
+      <p class="lead">Cada caso sigue el mismo camino, sin importar el tipo de asistencia.</p>
+    </div>
+    <ol class="steps__list">
+      {process.steps.map((s) => (
+        <li class="steps__item">
+          <span class="steps__n" aria-hidden="true">{s.n}</span>
+          <h3 class="steps__name">{s.name}</h3>
+          <p class="steps__text">{s.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .steps__eyebrow { color: #8FB4D9; }
+  .steps__eyebrow::before { background: linear-gradient(90deg, #fff 0 50%, var(--brand-blue) 50% 100%); }
+  .steps__list { display: grid; gap: var(--s-8); grid-template-columns: 1fr; counter-reset: step; position: relative; }
+  .steps__item { position: relative; padding-top: var(--s-6); border-top: 1px solid rgba(255,255,255,0.18); }
+  .steps__n { display: block; font-size: 2.75rem; font-weight: 800; line-height: 1; letter-spacing: -0.03em; color: #8FB4D9; margin-bottom: var(--s-4); }
+  .steps__name { color: #fff; margin-bottom: var(--s-2); }
+  .steps__text { color: var(--color-text-on-dark-muted); max-width: 34ch; text-wrap: pretty; }
+  @media (min-width: 768px) {
+    .steps__list { grid-template-columns: repeat(3, 1fr); gap: var(--s-8); }
+    .steps__item::before {
+      content: ''; position: absolute; top: -1px; left: 0; width: 56px; height: 3px;
+      background: linear-gradient(90deg, #fff 0 50%, var(--brand-blue) 50% 100%); border-radius: 2px;
+    }
+  }
+</style>

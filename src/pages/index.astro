@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import PartnerProof from '../components/PartnerProof.astro';
+import ProviderCTA from '../components/ProviderCTA.astro';
+import { services } from '../content/site';
+---
+<Base
+  title="Intelasist: Asistencia vial, hogar y salud en Panamá"
+  description="Intelasist (Intel Asistencia, S.A.) conecta empresas y personas en Panamá con soluciones de asistencia vial, hogar y salud. Atención 24/7 y una red de proveedores en crecimiento."
+  path="/"
+>
+  <Hero />
+  <TrustStrip />
+
+  <section class="section" aria-labelledby="servicios-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Servicios</p>
+        <h2 id="servicios-title">Soluciones para cada momento</h2>
+        <p class="lead">Tres categorías de asistencia, coordinadas por un mismo equipo y una misma forma de trabajar.</p>
+      </div>
+      <div class="grid-3">
+        {services.map((s, i) => <ServiceCard service={s} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <ProcessSteps />
+  <PartnerProof />
+  <ProviderCTA />
+</Base>

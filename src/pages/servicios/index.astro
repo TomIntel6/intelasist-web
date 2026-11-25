@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import ProviderCTA from '../../components/ProviderCTA.astro';
+import { services } from '../../content/site';
+---
+<Base
+  title="Servicios de asistencia en Panamá · Intelasist"
+  description="Portafolio de Intelasist: asistencia vial, asistencia hogar y asistencia salud para empresas en Panamá, coordinadas con una red de proveedores y seguimiento de cada caso."
+  path="/servicios"
+>
+  <section class="page-hero dots">
+    <div class="container">
+      <Breadcrumbs items={[{ label: 'Servicios' }]} />
+      <div class="page-hero__copy">
+        <p class="eyebrow">Portafolio</p>
+        <h1>Servicios de asistencia</h1>
+        <p class="lead">Coordinamos soluciones de asistencia para empresas y sus clientes. Cada categoría sigue el mismo modelo: recepción, coordinación y seguimiento.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-3">
+        {services.map((s, i) => <ServiceCard service={s} index={i} />)}
+      </div>
+      <p class="muted small" style="margin-top: var(--s-8); max-width: 60ch;">
+        El alcance de cada servicio se define en el programa acordado con cada empresa. Intelasist coordina la asistencia; no es una aseguradora ni un prestador médico.
+      </p>
+    </div>
+  </section>
+
+  <ProviderCTA />
+</Base>
+

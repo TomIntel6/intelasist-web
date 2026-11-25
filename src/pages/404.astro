@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Página no encontrada · Intelasist" description="La página que buscas no existe o fue movida." path="/404" noindex>
+  <section class="section dots nf">
+    <div class="container">
+      <p class="eyebrow">Error 404</p>
+      <h1>No encontramos esa página.</h1>
+      <p class="lead">Puede que el enlace haya cambiado. Estas rutas te llevan de vuelta.</p>
+      <div class="nf__links">
+        <a href="/" class="btn btn--primary">Ir al inicio</a>
+        <a href="/servicios" class="link-arrow">Ver servicios <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+        <a href="/contacto" class="link-arrow">Contacto <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .nf { min-height: 60vh; background-color: var(--color-surface); }
+  .nf .eyebrow { margin-bottom: var(--s-4); }
+  .nf h1 { margin-bottom: var(--s-4); }
+  .nf__links { display: flex; flex-wrap: wrap; gap: var(--s-4) var(--s-8); align-items: center; margin-top: var(--s-8); }
+</style>

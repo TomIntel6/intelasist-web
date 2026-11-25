@@ -1,0 +1,81 @@
+---
+import { hero } from '../content/site';
+---
+<section class="hero dots" aria-labelledby="hero-title">
+  <div class="container hero__grid">
+    <div class="hero__copy rise">
+      <p class="eyebrow">{hero.eyebrow}</p>
+      <h1 id="hero-title">{hero.title}</h1>
+      <p class="lead">{hero.text}</p>
+      <div class="hero__actions">
+        <a href={hero.cta.href} class="btn btn--primary">{hero.cta.label}</a>
+        <a href={hero.link.href} class="link-arrow">
+          {hero.link.label}
+          <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!--
+      Ilustración de marca (no fotografía). La foto del sitio actual es un recurso Getty
+      licenciado por el constructor de GoDaddy y no se reutiliza. Sustituir por fotografía
+      propia o licenciada cuando dirección la entregue: ver docs/ASSETS.md.
+    -->
+    <figure class="hero__art" aria-hidden="true">
+      <svg viewBox="0 0 520 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="route" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#163E64"/><stop offset="1" stop-color="#0E62AC"/>
+          </linearGradient>
+        </defs>
+        <!-- tarjeta base -->
+        <rect x="24" y="40" width="472" height="340" rx="28" fill="#FFFFFF" stroke="#D8DBE0"/>
+        <!-- trazado de ruta -->
+        <path class="hero__path" d="M72 300 C 140 300, 150 160, 240 160 S 330 260, 400 230 S 440 110, 456 96" stroke="url(#route)" stroke-width="6" stroke-linecap="round"/>
+        <!-- nodos -->
+        <g class="hero__node hero__node--1"><circle cx="72" cy="300" r="22" fill="#E7EEF5"/><circle cx="72" cy="300" r="10" fill="#163E64"/></g>
+        <g class="hero__node hero__node--2"><circle cx="240" cy="160" r="22" fill="#E7EEF5"/><circle cx="240" cy="160" r="10" fill="#163E64"/></g>
+        <g class="hero__node hero__node--3"><circle cx="400" cy="230" r="22" fill="#E7EEF5"/><circle cx="400" cy="230" r="10" fill="#0E62AC"/></g>
+        <g class="hero__node hero__node--4"><circle cx="456" cy="96" r="26" fill="#0E62AC"/><path d="M445 96l8 8 14-16" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <!-- etiquetas -->
+        <g font-family="Manrope, system-ui, sans-serif" font-weight="700" font-size="14" fill="#163E64">
+          <text x="60" y="350">Recepción</text>
+          <text x="200" y="128">Coordinación</text>
+          <text x="364" y="276">Seguimiento</text>
+        </g>
+        <!-- tarjeta estado -->
+        <g transform="translate(300 300)">
+          <rect width="172" height="56" rx="14" fill="#F4F7FA" stroke="#D8DBE0"/>
+          <circle cx="24" cy="28" r="7" fill="#1E6B3A"/>
+          <text x="42" y="24" font-family="Manrope, system-ui, sans-serif" font-size="11" font-weight="700" fill="#4F6276" letter-spacing="1">ESTADO</text>
+          <text x="42" y="42" font-family="Manrope, system-ui, sans-serif" font-size="14" font-weight="800" fill="#163E64">Caso cerrado</text>
+        </g>
+        <!-- marca bicolor -->
+        <rect x="56" y="72" width="28" height="5" rx="2.5" fill="#163E64"/><rect x="84" y="72" width="28" height="5" rx="2.5" fill="#0E62AC"/>
+      </svg>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero { padding-block: var(--s-12) var(--s-16); border-bottom: 1px solid var(--color-border); background-color: var(--color-surface); }
+  .hero__grid { display: grid; gap: var(--s-12); align-items: center; grid-template-columns: 1fr; }
+  .hero__copy { max-width: 36rem; }
+  .hero__copy .eyebrow { margin-bottom: var(--s-6); }
+  .hero__copy h1 { margin-bottom: var(--s-6); }
+  .hero__copy .lead { margin-bottom: var(--s-8); }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--s-4) var(--s-8); align-items: center; }
+  .hero__art { max-width: 520px; width: 100%; margin-inline: auto; }
+  .hero__path { stroke-dasharray: 900; stroke-dashoffset: 900; animation: draw 1.4s var(--ease) 200ms forwards; }
+  .hero__node { opacity: 0; animation: pop 400ms var(--ease) forwards; }
+  .hero__node--1 { animation-delay: 300ms; } .hero__node--2 { animation-delay: 650ms; }
+  .hero__node--3 { animation-delay: 1000ms; } .hero__node--4 { animation-delay: 1400ms; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes pop { from { opacity: 0; transform: scale(0.85); transform-origin: center; } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .hero__path { stroke-dashoffset: 0; animation: none; } .hero__node { opacity: 1; animation: none; } }
+  @media (min-width: 900px) {
+    .hero { padding-block: var(--s-24); }
+    .hero__grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--s-16); }
+    .hero__copy h1 { max-width: 12ch; }
+  }
+</style>

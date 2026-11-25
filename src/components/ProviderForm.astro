@@ -1,0 +1,178 @@
+---
+/**
+ * Formulario inicial de inscripción de proveedores.
+ *
+ * ESTADO: sin integración de backend/CRM aprobada. Para no simular un envío,
+ * el formulario valida en cliente y abre el cliente de correo del usuario con la
+ * solicitud prellenada hacia el correo público info@intelasist.com. No se persiste
+ * nada en el navegador ni en terceros. Cuando dirección apruebe el destino
+ * (ver .env.example → PROVIDER_FORM_ENDPOINT), sustituir `mode` por 'endpoint' e
+ * implementar validación server-side, rate limit y confirmación tras persistencia.
+ */
+import { company, providers, provinces } from '../content/site';
+const mode: 'mailto' | 'endpoint' = 'mailto';
+---
+<form class="form" id="inscripcion" novalidate data-provider-form data-mode={mode} data-to={company.email.display} aria-describedby="form-help">
+  <p id="form-help" class="form__help">
+    Completa la solicitud inicial. Nuestro equipo la revisará y te contactará. No solicitamos documentos ni datos bancarios en esta etapa.
+  </p>
+
+  <div class="form__grid">
+    <div class="field">
+      <label for="f-empresa">Nombre o razón social <span aria-hidden="true">*</span></label>
+      <input id="f-empresa" name="empresa" type="text" required maxlength="120" autocomplete="organization" />
+      <p class="field__error" id="e-empresa" hidden></p>
+    </div>
+    <div class="field">
+      <label for="f-contacto">Nombre de contacto <span aria-hidden="true">*</span></label>
+      <input id="f-contacto" name="contacto" type="text" required maxlength="100" autocomplete="name" />
+      <p class="field__error" id="e-contacto" hidden></p>
+    </div>
+    <div class="field">
+      <label for="f-telefono">Teléfono <span aria-hidden="true">*</span></label>
+      <input id="f-telefono" name="telefono" type="tel" required maxlength="25" inputmode="tel" autocomplete="tel" placeholder="+507 ..." />
+      <p class="field__error" id="e-telefono" hidden></p>
+    </div>
+    <div class="field">
+      <label for="f-correo">Correo electrónico <span aria-hidden="true">*</span></label>
+      <input id="f-correo" name="correo" type="email" required maxlength="120" autocomplete="email" />
+      <p class="field__error" id="e-correo" hidden></p>
+    </div>
+    <div class="field">
+      <label for="f-provincia">Provincia o zona <span aria-hidden="true">*</span></label>
+      <select id="f-provincia" name="provincia" required>
+        <option value="">Selecciona una opción</option>
+        {provinces.map((p) => <option value={p}>{p}</option>)}
+        <option value="Varias provincias">Varias provincias</option>
+      </select>
+      <p class="field__error" id="e-provincia" hidden></p>
+    </div>
+    <div class="field">
+      <label for="f-servicio">Tipo de servicio <span aria-hidden="true">*</span></label>
+      <select id="f-servicio" name="servicio" required>
+        <option value="">Selecciona una opción</option>
+        {providers.categories.map((c) => <option value={c}>{c}</option>)}
+      </select>
+      <p class="field__error" id="e-servicio" hidden></p>
+    </div>
+    <div class="field field--full">
+      <label for="f-comentario">Comentario <span class="muted">(opcional)</span></label>
+      <textarea id="f-comentario" name="comentario" rows="4" maxlength="600"></textarea>
+    </div>
+
+    <!-- Honeypot accesible: oculto a personas, etiquetado para tecnologías de apoyo -->
+    <div class="field field--hp" aria-hidden="true">
+      <label for="f-web">No completar este campo</label>
+      <input id="f-web" name="sitio_web" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="field field--full field--check">
+      <input id="f-privacidad" name="privacidad" type="checkbox" required />
+      <label for="f-privacidad">He leído el <a href="/privacidad">aviso de privacidad</a> y acepto el tratamiento de mis datos para esta solicitud. <span aria-hidden="true">*</span></label>
+      <p class="field__error" id="e-privacidad" hidden></p>
+    </div>
+  </div>
+
+  <div class="form__actions">
+    <button type="submit" class="btn btn--primary">Enviar solicitud</button>
+    <p class="small muted">También puedes escribirnos a <a href={company.email.href}>{company.email.display}</a>.</p>
+  </div>
+
+  <p class="form__status" role="status" aria-live="polite" data-status></p>
+  <noscript>
+    <p class="form__status form__status--info">Para enviar tu solicitud, escríbenos a <a href={company.email.href}>{company.email.display}</a> con los datos anteriores.</p>
+  </noscript>
+</form>
+
+<style>
+  .form { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); padding: var(--s-6); }
+  @media (min-width: 768px) { .form { padding: var(--s-8); } }
+  .form__help { color: var(--color-text-muted); margin-bottom: var(--s-6); max-width: 60ch; }
+  .form__grid { display: grid; gap: var(--s-4); grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .form__grid { grid-template-columns: 1fr 1fr; gap: var(--s-4) var(--s-6); } .field--full { grid-column: 1 / -1; } }
+  .field { display: flex; flex-direction: column; gap: var(--s-2); }
+  .field label { font-weight: 700; color: var(--brand-navy); font-size: var(--fs-small); }
+  .field input, .field select, .field textarea {
+    font: inherit; width: 100%; min-height: 48px; padding: var(--s-3) var(--s-4);
+    border: 1.5px solid var(--color-border); border-radius: var(--radius-sm); background: #fff; color: var(--color-text);
+    transition: border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+  }
+  .field textarea { resize: vertical; min-height: 120px; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--brand-blue); box-shadow: 0 0 0 3px rgba(14,98,172,0.18); }
+  .field [aria-invalid="true"] { border-color: var(--color-error); }
+  .field__error { color: var(--color-error); font-size: var(--fs-small); font-weight: 600; }
+  .field--hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .field--check { display: grid; grid-template-columns: auto 1fr; gap: var(--s-2) var(--s-3); align-items: start; }
+  .field--check input { width: 22px; height: 22px; min-height: 0; margin-top: 2px; accent-color: var(--brand-blue); }
+  .field--check label { font-weight: 500; color: var(--color-text); }
+  .field--check .field__error { grid-column: 1 / -1; }
+  .form__actions { margin-top: var(--s-8); display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center; }
+  .form__status { margin-top: var(--s-4); font-weight: 600; }
+  .form__status:empty { display: none; }
+  .form__status--ok { color: var(--color-success); }
+  .form__status--error { color: var(--color-error); }
+  .form__status--info { color: var(--color-text-muted); }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-provider-form]');
+  if (form) {
+    const status = form.querySelector<HTMLElement>('[data-status]')!;
+    const to = form.dataset.to ?? '';
+    const msgs: Record<string, string> = {
+      empresa: 'Indica el nombre o razón social.',
+      contacto: 'Indica el nombre de la persona de contacto.',
+      telefono: 'Indica un teléfono válido.',
+      correo: 'Indica un correo electrónico válido.',
+      provincia: 'Selecciona una provincia o zona.',
+      servicio: 'Selecciona el tipo de servicio.',
+      privacidad: 'Debes aceptar el aviso de privacidad para continuar.',
+    };
+    const fields = () => Array.from(form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('[required]'));
+
+    const validate = (el: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) => {
+      const err = form.querySelector<HTMLElement>(`#e-${el.name}`);
+      let ok = el instanceof HTMLInputElement && el.type === 'checkbox' ? el.checked : el.value.trim().length > 0;
+      if (ok && el.name === 'correo') ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(el.value.trim());
+      if (ok && el.name === 'telefono') ok = /^[+\d][\d\s().-]{6,24}$/.test(el.value.trim());
+      el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+      if (err) { err.textContent = ok ? '' : msgs[el.name] ?? 'Campo requerido.'; err.hidden = ok; if (!ok) el.setAttribute('aria-describedby', err.id); else el.removeAttribute('aria-describedby'); }
+      return ok;
+    };
+    fields().forEach((el) => el.addEventListener('blur', () => validate(el)));
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      status.className = 'form__status';
+      status.textContent = '';
+      const hp = form.querySelector<HTMLInputElement>('[name="sitio_web"]');
+      if (hp && hp.value) return; // bot: ignorar silenciosamente
+      const results = fields().map(validate);
+      if (results.includes(false)) {
+        status.classList.add('form__status--error');
+        status.textContent = 'Revisa los campos marcados antes de enviar.';
+        fields().find((f) => f.getAttribute('aria-invalid') === 'true')?.focus();
+        return;
+      }
+      const d = new FormData(form);
+      const v = (k: string) => String(d.get(k) ?? '').trim();
+      const subject = `Solicitud de inscripción de proveedor: ${v('empresa')}`;
+      const body = [
+        'Solicitud inicial de inscripción a la red de proveedores de Intelasist',
+        '',
+        `Nombre o razón social: ${v('empresa')}`,
+        `Nombre de contacto: ${v('contacto')}`,
+        `Teléfono: ${v('telefono')}`,
+        `Correo: ${v('correo')}`,
+        `Provincia o zona: ${v('provincia')}`,
+        `Tipo de servicio: ${v('servicio')}`,
+        `Comentario: ${v('comentario') || '-'}`,
+        '',
+        'Acepto el aviso de privacidad: Sí',
+      ].join('\n');
+      window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      status.classList.add('form__status--ok');
+      status.textContent = `Se abrirá tu aplicación de correo con la solicitud prellenada. Si no se abre, envía los datos a ${to}.`;
+    });
+  }
+</script>

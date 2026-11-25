@@ -1,0 +1,28 @@
+---
+import { providers } from '../content/site';
+---
+<section class="section section--tint cta dots" aria-labelledby="prov-title">
+  <div class="container cta__inner">
+    <div>
+      <p class="eyebrow">Red de proveedores</p>
+      <h2 id="prov-title">{providers.title}</h2>
+      <p class="lead">{providers.text}</p>
+    </div>
+    <div class="cta__actions">
+      <a href={providers.cta.href} class="btn btn--primary">{providers.cta.label}</a>
+      <a href="/proveedores" class="link-arrow">
+        Conoce los requisitos
+        <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta { background-color: var(--color-surface-tint); }
+  .cta__inner { display: grid; gap: var(--s-8); grid-template-columns: 1fr; align-items: center; }
+  .cta__inner .eyebrow { margin-bottom: var(--s-4); }
+  .cta__inner .lead { margin-top: var(--s-4); }
+  .cta__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-4) var(--s-8); }
+  @media (min-width: 900px) { .cta__inner { grid-template-columns: 1.3fr 0.7fr; } .cta__actions { justify-content: flex-end; } }
+</style>
