@@ -17,7 +17,8 @@ const { items } = Astro.props;
 
 <style>
   .crumbs { font-size: var(--fs-small); }
-  .crumbs__list { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-1); }
+  .crumbs__list { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--s-1); }
+  @media (min-width: 640px) { .crumbs__list { justify-content: flex-start; } }
   .crumbs__list li { display: inline-flex; align-items: center; gap: var(--s-1); }
   .crumbs a { color: var(--color-text-muted); text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
   .crumbs a:hover { color: var(--brand-blue); text-decoration: underline; }

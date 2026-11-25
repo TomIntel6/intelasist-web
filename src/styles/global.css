@@ -140,6 +140,16 @@ h3, .h3 { font-family: var(--font-display); font-size: var(--fs-h3); line-height
 .rise > *:nth-child(4) { animation-delay: 180ms; }
 .rise > *:nth-child(5) { animation-delay: 240ms; }
 
+/* ---------- Móvil: contenido centrado al hacer scroll ---------- */
+@media (max-width: 639px) {
+  .section-head, .page-hero__copy { text-align: center; margin-inline: auto; }
+  .section-head .lead, .page-hero__copy .lead, .section-head .eyebrow, .page-hero__copy .eyebrow { margin-inline: auto; }
+  .section-head--row { justify-content: center; }
+  .section-head--row > div { margin-inline: auto; }
+  .section-head--row > .link-arrow { margin-inline: auto; }
+  .page-hero__actions { display: flex; justify-content: center; }
+}
+
 /* ---------- Cabecera de página interior ---------- */
 .page-hero { padding-block: var(--s-6) var(--s-12); background-color: var(--color-surface-alt); border-bottom: 1px solid var(--color-border); }
 .page-hero__copy { margin-top: var(--s-8); max-width: 44rem; }

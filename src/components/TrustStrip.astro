@@ -25,14 +25,14 @@ const icons = [
 <style>
   .trust { background: var(--color-surface-alt); border-block: 1px solid var(--color-border); }
   .trust__list { display: grid; grid-template-columns: 1fr; }
-  .trust__item { display: flex; gap: var(--s-4); align-items: center; padding: var(--s-5, 20px) 0; border-top: 1px solid var(--color-border); }
+  .trust__item { display: flex; flex-direction: column; gap: var(--s-3); align-items: center; text-align: center; padding: var(--s-6) 0; border-top: 1px solid var(--color-border); }
   .trust__item:first-child { border-top: 0; }
   .trust__icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: #fff; border: 1px solid var(--color-border); color: var(--brand-blue); flex: none; }
   .trust__label { font-family: var(--font-display); font-weight: 700; color: var(--brand-navy); }
   .trust__detail { color: var(--color-text-muted); font-size: var(--fs-small); }
   @media (min-width: 768px) {
     .trust__list { grid-template-columns: repeat(3, 1fr); }
-    .trust__item { border-top: 0; border-left: 1px solid var(--color-border); padding: var(--s-6) var(--s-8); }
+    .trust__item { flex-direction: row; gap: var(--s-4); text-align: left; border-top: 0; border-left: 1px solid var(--color-border); padding: var(--s-6) var(--s-8); }
     .trust__item:first-child { border-left: 0; padding-left: 0; }
   }
 </style>

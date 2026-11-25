@@ -1,5 +1,5 @@
 ---
-import { hero, services, process } from '../content/site';
+import { hero, services } from '../content/site';
 ---
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero__copy rise">
@@ -18,14 +18,6 @@ import { hero, services, process } from '../content/site';
     licenciada cuando dirección la entregue: ver docs/ASSETS.md.
   -->
   <div class="hero__panel" aria-hidden="true">
-    <ol class="hero__steps">
-      {process.steps.map((st, i) => (
-        <li class:list={['hero__step', { 'hero__step--done': i === process.steps.length - 1 }]}>
-          <span class="hero__step-dot"></span>
-          <span class="hero__step-name">{st.name}</span>
-        </li>
-      ))}
-    </ol>
     <svg class="hero__art" viewBox="0 0 560 400" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path class="hero__path" d="M56 300 C 130 300, 150 150, 250 150 S 350 250, 420 220 S 470 110, 500 86" stroke="#FFFFFF" stroke-opacity="0.9" stroke-width="5" stroke-linecap="round"/>
       <g class="hero__node hero__node--1"><circle cx="56" cy="300" r="20" fill="#FFFFFF" fill-opacity="0.12"/><circle cx="56" cy="300" r="9" fill="#FFFFFF"/></g>
@@ -48,24 +40,14 @@ import { hero, services, process } from '../content/site';
 <style>
   /* Móvil: una columna dentro de los márgenes normales */
   .hero { display: grid; grid-template-columns: 1fr; gap: var(--s-8); padding: var(--s-8) var(--gutter) var(--s-12); background: var(--color-surface); }
-  .hero__copy { max-width: 36rem; }
+  .hero__copy { max-width: 36rem; margin-inline: auto; text-align: center; }
+  .hero__copy .lead { margin-inline: auto; }
   .hero__copy .eyebrow { margin-bottom: var(--s-4); }
   .hero__copy h1 { margin-bottom: var(--s-4); }
   .hero__copy .lead { margin-bottom: var(--s-6); }
   .hero__actions { display: grid; grid-template-columns: 1fr; gap: var(--s-3); }
   @media (min-width: 640px) { .hero__actions { display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center; } }
 
-  /* Stepper compacto (solo móvil) */
-  .hero__steps { display: grid; grid-template-columns: repeat(3, 1fr); position: relative; padding-top: var(--s-2); }
-  .hero__steps::before { content: ''; position: absolute; left: 16.6%; right: 16.6%; top: calc(var(--s-2) + 9px); height: 3px; background: rgba(255,255,255,0.35); border-radius: 2px; }
-  .hero__step { position: relative; display: flex; flex-direction: column; align-items: center; gap: var(--s-3); text-align: center; }
-  .hero__step-dot { position: relative; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 6px rgba(255,255,255,0.14); }
-  .hero__step--done .hero__step-dot { background: var(--brand-blue); box-shadow: 0 0 0 6px rgba(14,98,172,0.35); }
-  .hero__step--done .hero__step-dot::after { content: ''; position: absolute; left: 7px; top: 4px; width: 5px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-  .hero__step-name { font-family: var(--font-display); font-weight: 700; font-size: 0.75rem; color: #fff; }
-  @media (min-width: 360px) { .hero__step-name { font-size: 0.8125rem; } }
-  @media (min-width: 400px) { .hero__step-name { font-size: var(--fs-small); } }
-  .hero__art { display: none; }
 
   .hero__panel {
     position: relative; background: var(--brand-navy-deep); color: #fff;
@@ -76,8 +58,8 @@ import { hero, services, process } from '../content/site';
     content: ''; position: absolute; inset: auto -20% -40% auto; width: 70%; aspect-ratio: 1; border-radius: 50%;
     background: var(--brand-blue); opacity: 0.35; filter: blur(60px); pointer-events: none;
   }
-  @media (min-width: 900px) { .hero__art { display: block; position: relative; width: 100%; max-width: 560px; height: auto; } .hero__steps { display: none; } }
-  .hero__chips { position: relative; display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .hero__art { position: relative; width: 100%; max-width: 560px; height: auto; margin-inline: auto; }
+  .hero__chips { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-2); }
   .hero__chips li {
     display: inline-flex; align-items: center; min-height: 36px; padding: 0 var(--s-3);
     border-radius: var(--radius-pill); border: 1px solid rgba(255,255,255,0.25);
@@ -101,7 +83,9 @@ import { hero, services, process } from '../content/site';
       width: 100%; max-width: var(--container); margin-inline: auto;
       padding: var(--s-16) var(--gutter);
     }
-    .hero__copy { max-width: none; padding-right: var(--s-8); }
+    .hero__copy { max-width: none; margin-inline: 0; text-align: left; padding-right: var(--s-8); }
+    .hero__copy .lead { margin-inline: 0; }
+    .hero__chips { justify-content: flex-start; }
     .hero__copy h1 { max-width: 11ch; }
     .hero__panel { padding: var(--s-12) var(--s-10, 40px); min-height: 520px; justify-content: center; border-radius: 24px; }
     .hero__art { max-width: 600px; }
